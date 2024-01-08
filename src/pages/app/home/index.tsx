@@ -117,16 +117,16 @@ export function Home() {
       city: "Cuiabá",
       state: "Mato Grosso",
       country: "Brasil",
-    }
+    },
   ]
-
 
   return (
     <>
       <Helmet title="página inicial" />
 
-
-      {locations.map((locate, index) => (<Location {...locate} key={index} />))}
+      {locations.map((locate, index) => (
+        <Location {...locate} key={index} />
+      ))}
     </>
   )
 }
