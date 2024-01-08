@@ -1,5 +1,5 @@
-import { MapPin } from "lucide-react";
-import { Card } from "./card";
+import { MapPin } from "lucide-react"
+import { Card } from "./card"
 
 interface LocationProps {
   city: string
@@ -9,13 +9,13 @@ interface LocationProps {
 
 export function Location(location: LocationProps): JSX.Element | null {
   return (
-    <Card className="rounded-full flex py-1 px-4 border-zinc-800 flex-row items-center justify-center gap-2">
+    <Card className="flex flex-row items-center justify-center gap-2 rounded-full border-zinc-800 px-4 py-1">
       <MapPin className="size-7" />
-      <div className="flex flex-col me-3">
+      <div className="me-3 flex flex-col">
         <span className="font-bold">{location.city}</span>
         <div>
           <span className="text-sm">{location.state}</span>
-          <span className="text-sm me-1">,</span>
+          <span className="me-1 text-sm">,</span>
           <span className="text-sm">{location.country}</span>
         </div>
       </div>
