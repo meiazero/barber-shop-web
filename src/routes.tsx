@@ -1,12 +1,19 @@
-import { RouteObject, createBrowserRouter } from 'react-router-dom'
-import { NotFound } from './pages/404'
-import { AppLayout } from './pages/_layouts/app'
+import { RouteObject, createBrowserRouter } from "react-router-dom"
+import { NotFound } from "./pages/404"
+import { AppLayout } from "./pages/_layouts/app"
+import { Home } from "./pages/app/Home"
 
 const routes: RouteObject[] = [
   {
-    path: '/',
+    path: "/",
     element: <AppLayout />,
-    errorElement: <NotFound />
+    errorElement: <NotFound />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+    ],
   },
 ]
 
