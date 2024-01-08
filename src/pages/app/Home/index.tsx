@@ -4,7 +4,9 @@ export function Home() {
   return (
     <>
       <Helmet title="Home" />
-      <div>Olái mundo!</div>
+      <div>
+        <h1 className="text-3xl">Olái mundo!</h1>
+      </div>
     </>
   )
 }
