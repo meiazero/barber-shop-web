@@ -23,7 +23,7 @@ const routes: RouteObject[] = [
   {
     path: "*",
     element: <NotFound />,
-  }
+  },
 ]
 
 export const router = createBrowserRouter(routes)
