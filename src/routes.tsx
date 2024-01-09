@@ -1,8 +1,9 @@
-import { RouteObject, createBrowserRouter } from "react-router-dom"
-import { NotFound } from "./pages/404"
-import { AppLayout } from "./pages/_layouts/app"
-import { Home } from "./pages/app/home"
-import { NewRace } from "./pages/app/race"
+import { RouteObject, createBrowserRouter } from "react-router-dom";
+import { NotFound } from "./pages/404";
+import { AppLayout } from "./pages/_layouts/app";
+import { Home } from "./pages/app/home";
+import { Races } from "./pages/app/races";
+import { NewRace } from "./pages/app/races/new";
 
 const routes: RouteObject[] = [
   {
@@ -11,12 +12,26 @@ const routes: RouteObject[] = [
     errorElement: <NotFound />,
     children: [
       {
-        path: "/",
+        path: "",
         element: <Home />,
       },
       {
-        path: "/new",
-        element: <NewRace />,
+        path: "/races",
+        errorElement: <NotFound />,
+        children: [
+          {
+            path: "",
+            element: <Races />,
+          },
+          {
+            path: "new",
+            element: <NewRace />,
+          },
+          {
+            path: ":id",
+            element: <h1>Detalhes da corrida</h1>,
+          },
+        ],
       },
     ],
   },
@@ -24,6 +39,6 @@ const routes: RouteObject[] = [
     path: "*",
     element: <NotFound />,
   },
-]
+];
 
-export const router = createBrowserRouter(routes)
+export const router = createBrowserRouter(routes);
