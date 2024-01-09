@@ -5,9 +5,7 @@ export function Races() {
     <>
       <Helmet title="minhas corridas" />
       <div>
-        <h1 className="text-3xl">
-          Minhas corridas
-        </h1>
+        <h1 className="text-3xl">Minhas corridas</h1>
       </div>
     </>
   )
