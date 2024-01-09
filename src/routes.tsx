@@ -15,23 +15,24 @@ const routes: RouteObject[] = [
         path: "",
         element: <Home />,
       },
+    ],
+  },
+  {
+    path: "/races",
+    element: <AppLayout />,
+    errorElement: <NotFound />,
+    children: [
       {
-        path: "/races",
-        errorElement: <NotFound />,
-        children: [
-          {
-            path: "",
-            element: <Races />,
-          },
-          {
-            path: "new",
-            element: <NewRace />,
-          },
-          {
-            path: ":id",
-            element: <h1>Detalhes da corrida</h1>,
-          },
-        ],
+        path: "",
+        element: <Races />,
+      },
+      {
+        path: "new",
+        element: <NewRace />,
+      },
+      {
+        path: ":id",
+        element: <h1>Detalhes da corrida</h1>,
       },
     ],
   },
