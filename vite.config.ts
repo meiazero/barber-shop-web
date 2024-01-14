@@ -11,4 +11,5 @@ export default defineConfig({
     },
   },
   envPrefix: "VITE_",
+  base: "/",
 })
