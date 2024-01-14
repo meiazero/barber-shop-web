@@ -10,7 +10,7 @@ const routes: RouteObject[] = [
     errorElement: <NotFound />,
     children: [
       {
-        path: "",
+        path: "/",
         element: <Home />,
       },
     ],
@@ -18,5 +18,5 @@ const routes: RouteObject[] = [
 ]
 
 export const router = createBrowserRouter(routes, {
-  basename: import.meta.env?.BASE_URL ?? "/",
+  basename: import.meta.env.BASE_URL || "/",
 })
