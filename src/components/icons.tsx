@@ -40,43 +40,43 @@ export const Icons = {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_5_10)">
-        <rect width="30" height="30" rx="2" fill="white" />
-        <g clip-path="url(#clip1_5_10)">
+      <g clipPath="url(#clip0_5_10)">
+        <rect width="30" height="30" rx="2" fill="none" />
+        <g clipPath="url(#clip1_5_10)">
           <path
             d="M8.69616 14.7942C10.131 13.9657 10.6227 12.131 9.79424 10.6961C8.96581 9.26122 7.13104 8.7696 5.69616 9.59802C4.26128 10.4264 3.76966 12.2612 4.59808 13.6961C5.42651 15.131 7.26128 15.6226 8.69616 14.7942Z"
-            stroke="black"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M10.0921 12.9722L15.3923 14.3923"
-            stroke="black"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M18.3205 3.46405L13.9721 19.6924"
-            stroke="black"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M14.6962 25.1865C16.131 24.3581 16.6227 22.5233 15.7942 21.0884C14.9658 19.6536 13.131 19.1619 11.6962 19.9904C10.2613 20.8188 9.76966 22.6536 10.5981 24.0884C11.4265 25.5233 13.2613 26.0149 14.6962 25.1865Z"
-            stroke="black"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
           <path
             d="M19.2172 15.4172L26.3205 17.3206"
-            stroke="black"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </g>
       </g>
