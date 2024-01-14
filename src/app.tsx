@@ -5,7 +5,7 @@ import { router } from "./routes"
 export default function App() {
   return (
     <HelmetProvider>
-      <Helmet titleTemplate="%s | itaxi" />
+      <Helmet titleTemplate="%s | barber.shop" />
       <RouterProvider router={router} />
     </HelmetProvider>
   )
