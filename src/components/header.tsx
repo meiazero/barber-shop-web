@@ -7,7 +7,7 @@ export function Header() {
       <div className="container flex flex-row items-center justify-between">
         <h1 className="text-4xl font-bold">
           <Link to="/" title="Página Inicial">
-            itaxi
+            barber.shop
           </Link>
         </h1>
         <NavMenu />
