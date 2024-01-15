@@ -29,15 +29,15 @@ export const router = createBrowserRouter([
             path: "dashboard/",
             element: <Dashboard />,
           },
-          {
-            path: "privacy/",
-            element: <Privacy />,
-          },
-          {
-            path: "terms/",
-            element: <Terms />,
-          },
         ],
+      },
+      {
+        path: "privacy/",
+        element: <Privacy />,
+      },
+      {
+        path: "terms/",
+        element: <Terms />,
       },
     ],
   },
