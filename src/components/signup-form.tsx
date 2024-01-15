@@ -9,6 +9,7 @@ import { Label } from "./ui/label"
 
 const signUpSchema = z.object({
   fullName: z.string(),
+  barberShopName: z.string(),
   email: z.string().email(),
   password: z.string().min(5),
 })
@@ -29,9 +30,10 @@ export function SignUpForm() {
   const handleRegisterUser = async ({
     email,
     fullName,
+    barberShopName,
     password,
   }: SignUpSchema) => {
-    const data = { email, fullName, password }
+    const data = { email, fullName, barberShopName, password }
     try {
       console.log(data)
 
@@ -64,6 +66,16 @@ export function SignUpForm() {
           </div>
 
           <div className="grid gap-2">
+            <Label htmlFor="barberShopName">Nome da barbearia</Label>
+            <Input
+              id="barberShopName"
+              type="text"
+              autoCorrect="off"
+              {...register("barberShopName")}
+            />
+          </div>
+
+          <div className="grid gap-2">
             <Label htmlFor="email">Seu e-mail</Label>
             <Input
               id="email"
@@ -79,7 +91,7 @@ export function SignUpForm() {
             <Label htmlFor="password">Sua senha</Label>
             <Input
               id="password"
-              placeholder="minhaSenhaSegura"
+              placeholder="u344X!8%"
               type="password"
               {...register("password")}
             />
