@@ -30,12 +30,11 @@ export function SignInForm() {
     },
   })
 
-  const handleAuthenticate = async ({ email, password }: SignInSchema) => {
-    const data = { email, password }
+  const handleAuthenticate = async ({ email }: SignInSchema) => {
     navigate("/")
 
     toast.success("Login efetuado com sucesso!", {
-      description: "",
+      description: `Bem-vindo, ${email}!`,
       action: {
         label: "Dashboard",
         onClick: () => {
