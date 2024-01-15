@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { useSearchParams } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
+import { toast } from "sonner"
 import { z } from "zod"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
@@ -15,6 +16,7 @@ type SignInSchema = z.infer<typeof signInSchema>
 
 export function SignInForm() {
   const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
 
   const {
     register,
@@ -28,8 +30,19 @@ export function SignInForm() {
     },
   })
 
-  const handleAuthenticate = async (data: SignInSchema) => {
-    console.log(data)
+  const handleAuthenticate = async ({ email, password }: SignInSchema) => {
+    const data = { email, password }
+    navigate("/")
+
+    toast.success("Login efetuado com sucesso!", {
+      description: "",
+      action: {
+        label: "Dashboard",
+        onClick: () => {
+          navigate("/dashboard")
+        },
+      },
+    })
   }
 
   return (
