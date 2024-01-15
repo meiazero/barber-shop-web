@@ -42,15 +42,15 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: "/",
+    path: "auth/",
     element: <AuthLayout />,
     children: [
       {
-        path: "/sign-in",
+        path: "sign-in/",
         element: <SignIn />,
       },
       {
-        path: "/sign-up",
+        path: "sign-up/",
         element: <SignUp />,
       },
     ],
