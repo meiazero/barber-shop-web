@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom"
 import { NotFound } from "./pages/404"
 import { AppLayout } from "./pages/_layouts/app"
 import { AuthLayout } from "./pages/_layouts/auth"
+import { LandingLayout } from "./pages/_layouts/landing"
 import { Home } from "./pages/app/home"
 import { Privacy } from "./pages/app/privacy"
 import { Terms } from "./pages/app/terms"
@@ -12,7 +13,7 @@ import { Dashboard } from "./pages/dashboard"
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <AppLayout />,
+    element: <LandingLayout />,
     errorElement: <NotFound />,
     children: [
       {
@@ -20,29 +21,36 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/dashboard",
-        element: <Dashboard />,
-      },
-      {
-        path: "/privacy",
-        element: <Privacy />,
-      },
-      {
-        path: "/terms",
-        element: <Terms />,
+        path: "/",
+        element: <AppLayout />,
+        errorElement: <NotFound />,
+        children: [
+          {
+            path: "dashboard/",
+            element: <Dashboard />,
+          },
+          {
+            path: "privacy/",
+            element: <Privacy />,
+          },
+          {
+            path: "terms/",
+            element: <Terms />,
+          },
+        ],
       },
     ],
   },
   {
-    path: "/",
+    path: "auth/",
     element: <AuthLayout />,
     children: [
       {
-        path: "/sign-in",
+        path: "sign-in/",
         element: <SignIn />,
       },
       {
-        path: "/sign-up",
+        path: "sign-up/",
         element: <SignUp />,
       },
     ],

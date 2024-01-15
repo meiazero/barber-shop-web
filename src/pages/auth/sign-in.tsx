@@ -20,7 +20,7 @@ export function SignIn() {
           <p className="pt-2 text-center text-sm text-muted-foreground">
             Ainda não possue uma conta? Crie uma{" "}
             <a
-              href="/sign-up"
+              href="/auth/sign-up"
               className="hover:text-primary-dark font-semibold text-primary"
             >
               aqui
