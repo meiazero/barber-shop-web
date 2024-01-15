@@ -11,7 +11,7 @@ export function SignUp() {
             Criar conta grátis
           </h1>
           <p className="text-sm text-muted-foreground">
-            Crie sua conta para melhorar a forma que trabalha.
+            Crie sua conta para gerenciar sua agenda.
           </p>
         </div>
 
