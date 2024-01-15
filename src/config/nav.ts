@@ -2,8 +2,8 @@ import { NavItem } from "@/types"
 
 export const NavConfig: NavItem[] = [
   {
-    href: "/",
-    title: "Home",
-    label: "home",
+    href: "#sobre-nos",
+    title: "Sobre o site",
+    label: "sobre",
   },
 ]
