@@ -33,7 +33,7 @@ export function SignInForm() {
   }
 
   return (
-    <div className="grid gap-6">
+    <div className="grid gap-6 px-3 pt-10">
       <form onSubmit={handleSubmit(handleAuthenticate)}>
         <div className="grid gap-4">
           <div className="grid gap-2">
