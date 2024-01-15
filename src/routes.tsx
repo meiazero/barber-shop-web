@@ -5,6 +5,7 @@ import { AuthLayout } from "./pages/_layouts/auth"
 import { Home } from "./pages/app/home"
 import { SignIn } from "./pages/auth/sign-in"
 import { SignUp } from "./pages/auth/sign-up"
+import { Dashboard } from "./pages/dashboard"
 
 const routes: RouteObject[] = [
   {
@@ -15,6 +16,10 @@ const routes: RouteObject[] = [
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
       },
     ],
   },
