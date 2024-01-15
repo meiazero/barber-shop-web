@@ -1,3 +1,10 @@
+import { Helmet } from "react-helmet-async"
+
 export function Privacy() {
-  return <h1>Politicas de Privacidade</h1>
+  return (
+    <>
+      <Helmet title="Politicas de Privacidade" />
+      <h1>Politicas de Privacidade</h1>
+    </>
+  )
 }
