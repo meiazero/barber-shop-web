@@ -17,7 +17,10 @@ export function Header() {
         </Link>
         {/* <NavMenu /> */}
 
-        <Link to="/sign-up" className={buttonVariants({ variant: "default" })}>
+        <Link
+          to="/auth/sign-up"
+          className={buttonVariants({ variant: "default" })}
+        >
           Cadastrar como barbeiro
           <MoveRight className="ms-2 size-5" />
         </Link>

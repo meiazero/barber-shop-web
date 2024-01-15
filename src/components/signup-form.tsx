@@ -42,7 +42,7 @@ export function SignUpForm() {
         action: {
           label: "Login",
           onClick: () => {
-            navigate(`/sign-in?email=${email}`)
+            navigate(`/auth/sign-in?email=${email}`)
           },
         },
       })

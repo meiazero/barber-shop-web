@@ -38,7 +38,7 @@ export function SignUp() {
         <p className="pt-2 text-center text-sm text-muted-foreground">
           Já possui uma conta?{" "}
           <a
-            href="/sign-in"
+            href="/auth/sign-in"
             className="hover:text-primary-dark font-semibold text-primary"
           >
             Faça login

@@ -9,7 +9,7 @@ export function AppLayout() {
 
   useEffect(() => {
     if (!user.authUser) {
-      navigate("/sign-in", { replace: true })
+      navigate("/auth/sign-in", { replace: true })
     }
   }, [user.authUser, navigate])
 
