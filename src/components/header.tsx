@@ -1,4 +1,4 @@
-import { NavMenu } from "@/components/nav-menu"
+import { MoveRight } from "lucide-react"
 import { Link } from "react-router-dom"
 import { Icons } from "./icons"
 import { Button } from "./ui/button"
@@ -15,9 +15,10 @@ export function Header() {
           <Icons.logo className="size-8" />
           barbearia
         </Link>
-        <NavMenu />
-        <Button asChild>
-          <Link to="/sign-in">Entrar</Link>
+        {/* <NavMenu /> */}
+        <Button>
+          <Link to="/sign-up">Cadastrar como barbeiro</Link>
+          <MoveRight className="ms-2 size-5" />
         </Button>
       </div>
     </header>
