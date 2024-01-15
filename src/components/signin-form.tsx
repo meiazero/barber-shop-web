@@ -8,6 +8,7 @@ import { Label } from "./ui/label"
 
 const signInSchema = z.object({
   email: z.string().email(),
+  password: z.string().min(5),
 })
 
 type SignInSchema = z.infer<typeof signInSchema>
@@ -23,6 +24,7 @@ export function SignInForm() {
     resolver: zodResolver(signInSchema),
     defaultValues: {
       email: searchParams.get("email") ?? "",
+      password: "",
     },
   })
 
@@ -43,6 +45,18 @@ export function SignInForm() {
               autoComplete="email"
               autoCorrect="off"
               {...register("email")}
+            />
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="password">Sua senha</Label>
+            <Input
+              id="password"
+              type="password"
+              autoCapitalize="none"
+              autoComplete="password"
+              autoCorrect="off"
+              {...register("password")}
             />
           </div>
 
