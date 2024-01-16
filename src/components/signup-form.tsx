@@ -69,7 +69,7 @@ export function SignUpForm() {
               autoCorrect="off"
               {...register("fullName")}
             />
-            {errors?.fullName && (
+            {errors.fullName && (
               <span className="text-sm text-red-500">
                 {errors.fullName.message}
               </span>
@@ -84,7 +84,7 @@ export function SignUpForm() {
               autoCorrect="off"
               {...register("barberShopName")}
             />
-            {errors?.barberShopName && (
+            {errors.barberShopName && (
               <span className="text-sm text-red-500">
                 {errors.barberShopName.message}
               </span>
@@ -101,7 +101,7 @@ export function SignUpForm() {
               autoCorrect="off"
               {...register("email")}
             />
-            {errors?.email && (
+            {errors.email && (
               <span className="text-sm text-red-500">
                 {errors.email.message}
               </span>
@@ -116,7 +116,7 @@ export function SignUpForm() {
               type="password"
               {...register("password")}
             />
-            {errors?.password && (
+            {errors.password && (
               <span className="text-sm text-red-500">
                 {errors.password.message}
               </span>
