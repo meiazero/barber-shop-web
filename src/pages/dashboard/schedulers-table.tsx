@@ -10,26 +10,33 @@ import {
 
 export function SchedulersTable() {
   return (
-    <section className="w-full rounded-md border px-10 py-5">
-      <h2 className="border-b border-b-slate-200 pb-5 text-xl font-semibold text-black-smoke">
+    <section className="w-full rounded-md border px-5 py-3 md:px-10 md:py-5">
+      <h2 className="text-md border-b border-b-slate-200 pb-5 font-semibold text-black-smoke md:text-xl">
         Agendamentos
       </h2>
 
       <Table>
-        <TableCaption>Agendamentos mais recentes.</TableCaption>
+        <TableCaption>Agendamentos do dia.</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Id</TableHead>
+            <TableHead>Horario</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Detalhes</TableHead>
-            <TableHead className="text-right">Horario</TableHead>
+            <TableHead className="text-right">Valor</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
+        <TableBody className="text-sm md:text-base">
           <TableRow>
-            <TableCell className="font-medium">001</TableCell>
+            <TableCell className="font-semibold">
+              {new Date("2023 15:30").toLocaleTimeString("pt-BR", {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </TableCell>
             <TableCell>Pago</TableCell>
-            <TableCell>Corte de cabelo e fazer a barba</TableCell>
+            <TableCell className="min-w-28 text-balance">
+              Corte de cabelo e fazer a barba
+            </TableCell>
             <TableCell className="text-right">R$25.00</TableCell>
           </TableRow>
         </TableBody>
