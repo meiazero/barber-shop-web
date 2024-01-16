@@ -8,8 +8,12 @@ import { Input } from "./ui/input"
 import { Label } from "./ui/label"
 
 const signInSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(5),
+  email: z
+    .string()
+    .email({ message: "Você precisa fornecer um e-mail válido" }),
+  password: z
+    .string()
+    .min(5, { message: "Sua senha precisa ter no mínimo 5 caracteres" }),
 })
 
 type SignInSchema = z.infer<typeof signInSchema>
@@ -21,7 +25,7 @@ export function SignInForm() {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = useForm<SignInSchema>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
@@ -54,10 +58,15 @@ export function SignInForm() {
               id="email"
               type="email"
               autoCapitalize="none"
-              autoComplete="email"
+              autoComplete="false"
               autoCorrect="off"
               {...register("email")}
             />
+            {errors.email && (
+              <span className="text-sm text-red-500">
+                {errors.email.message}
+              </span>
+            )}
           </div>
 
           <div className="grid gap-2">
@@ -70,6 +79,11 @@ export function SignInForm() {
               autoCorrect="off"
               {...register("password")}
             />
+            {errors.password && (
+              <span className="text-sm text-red-500">
+                {errors.password.message}
+              </span>
+            )}
           </div>
 
           <Button type="submit" disabled={isSubmitting}>

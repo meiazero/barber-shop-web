@@ -8,10 +8,16 @@ import { Input } from "./ui/input"
 import { Label } from "./ui/label"
 
 const signUpSchema = z.object({
-  fullName: z.string(),
-  barberShopName: z.string(),
-  email: z.string().email(),
-  password: z.string().min(5),
+  fullName: z.string().min(1, { message: "Você precisa fornecer seu nome" }),
+  barberShopName: z
+    .string()
+    .min(1, { message: "Você precisa fornecer o nome da sua barbearia" }),
+  email: z
+    .string()
+    .email({ message: "Você precisa fornecer um e-mail válido" }),
+  password: z
+    .string()
+    .min(5, { message: "Sua senha precisa ter no mínimo 5 caracteres" }),
 })
 
 type SignUpSchema = z.infer<typeof signUpSchema>
@@ -22,7 +28,7 @@ export function SignUpForm() {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = useForm<SignUpSchema>({
     resolver: zodResolver(signUpSchema),
   })
@@ -63,6 +69,11 @@ export function SignUpForm() {
               autoCorrect="off"
               {...register("fullName")}
             />
+            {errors?.fullName && (
+              <span className="text-sm text-red-500">
+                {errors.fullName.message}
+              </span>
+            )}
           </div>
 
           <div className="grid gap-2">
@@ -73,6 +84,11 @@ export function SignUpForm() {
               autoCorrect="off"
               {...register("barberShopName")}
             />
+            {errors?.barberShopName && (
+              <span className="text-sm text-red-500">
+                {errors.barberShopName.message}
+              </span>
+            )}
           </div>
 
           <div className="grid gap-2">
@@ -85,6 +101,11 @@ export function SignUpForm() {
               autoCorrect="off"
               {...register("email")}
             />
+            {errors?.email && (
+              <span className="text-sm text-red-500">
+                {errors.email.message}
+              </span>
+            )}
           </div>
 
           <div className="grid gap-2">
@@ -95,6 +116,11 @@ export function SignUpForm() {
               type="password"
               {...register("password")}
             />
+            {errors?.password && (
+              <span className="text-sm text-red-500">
+                {errors.password.message}
+              </span>
+            )}
           </div>
 
           <Button type="submit" disabled={isSubmitting}>
