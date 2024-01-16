@@ -1,11 +1,10 @@
 import { createContext, useEffect, useState } from "react"
 
 interface JwtToken {
-  id: string
+  id: number
   name: string
   barberName: string
   email: string
-  role: string
   exp: number
 }
 
@@ -17,7 +16,7 @@ interface UserTemplate {
 
 export const UserContext = createContext({} as UserTemplate)
 
-export function UserProvider({ children }: { children: React.ReactNode }) {
+function UserProvider({ children }: { children: React.ReactNode }) {
   const token = localStorage.getItem("token")
 
   const userTemplate: UserTemplate = {
@@ -26,17 +25,15 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       if (token) {
         setUser((prev: UserTemplate) => {
           const newUserObject = { ...prev, authUser: user }
-          localStorage.setItem("user", JSON.stringify(newUserObject))
+          localStorage.setItem("token", JSON.stringify(newUserObject))
           return newUserObject
         })
       }
     },
     unsetAuthUser: () => {
-      localStorage.removeItem("user")
       localStorage.removeItem("token")
       setUser((prev: UserTemplate) => {
-        const newUserObject = { ...prev, authUser: null }
-        return newUserObject
+        return { ...prev, authUser: null }
       })
     },
   }
@@ -45,7 +42,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
   const autoLogin = () => {
     try {
-      const savedUser = localStorage.getItem("user")
+      const savedUser = JSON.parse(localStorage.getItem("token") as string)
 
       setUser((prev: UserTemplate) => {
         const newUserObject = {
@@ -54,8 +51,9 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         }
         return newUserObject
       })
-    } catch (err) {
-      console.log(err)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      return new Error(err)
     }
   }
 
@@ -65,3 +63,5 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>
 }
+
+export default UserProvider
