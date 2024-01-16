@@ -24,12 +24,7 @@ export const router = createBrowserRouter([
         path: "/",
         element: <AppLayout />,
         errorElement: <NotFound />,
-        children: [
-          {
-            path: "dashboard/",
-            element: <Dashboard />,
-          },
-        ],
+        children: [],
       },
       {
         path: "privacy/",
@@ -38,6 +33,11 @@ export const router = createBrowserRouter([
       {
         path: "terms/",
         element: <Terms />,
+      },
+
+      {
+        path: "dashboard/",
+        element: <Dashboard />,
       },
     ],
   },
