@@ -1,11 +1,7 @@
 import { createContext, useEffect, useState } from "react"
 
 interface JwtToken {
-  id: number
-  name: string
-  barberName: string
-  email: string
-  exp: number
+  token: string
 }
 
 interface UserTemplate {
