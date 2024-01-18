@@ -1,4 +1,6 @@
+import { env } from "@/env"
 import { zodResolver } from "@hookform/resolvers/zod"
+import axios from "axios"
 import { useForm } from "react-hook-form"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { toast } from "sonner"
@@ -25,6 +27,7 @@ export function SignInForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { isSubmitting, errors },
   } = useForm<SignInSchema>({
     resolver: zodResolver(signInSchema),
@@ -34,18 +37,44 @@ export function SignInForm() {
     },
   })
 
-  const handleAuthenticate = async ({ email }: SignInSchema) => {
-    navigate("/")
-
-    toast.success("Login efetuado com sucesso!", {
-      description: `Bem-vindo, ${email}!`,
-      action: {
-        label: "Dashboard",
-        onClick: () => {
-          navigate("/dashboard")
+  const handleAuthenticate = async ({ email, password }: SignInSchema) => {
+    try {
+      const { data, status } = await axios.post(
+        `${env.VITE_API_URL}/sign-in`,
+        {
+          email,
+          password,
         },
-      },
-    })
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      if (status !== 200) {
+        throw new Error("Não foi possível efetuar o login. Tente novamente.")
+      }
+
+      localStorage.setItem("token", JSON.stringify(await data?.token))
+
+      reset()
+      navigate("/")
+
+      toast.success("Login efetuado com sucesso!", {
+        description: `Bem-vindo, ${email}!`,
+        action: {
+          label: "Dashboard",
+          onClick: () => {
+            navigate("/dashboard")
+          },
+        },
+      })
+    } catch (error) {
+      toast.error("Não foi possível efetuar o login. Tente novamente.", {
+        // @ts-ignore
+        description: error.message,
+      })
+    }
   }
 
   return (
