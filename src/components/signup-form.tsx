@@ -1,34 +1,48 @@
+import { env } from "@/env"
 import { zodResolver } from "@hookform/resolvers/zod"
+import axios from "axios"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import { toast } from "sonner"
 import { z } from "zod"
+import { Icons } from "./icons"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import { Label } from "./ui/label"
 
-const signUpSchema = z.object({
-  fullName: z.string().min(1, { message: "Você precisa fornecer seu nome" }),
-  barberShopName: z
-    .string()
-    .min(1, { message: "Você precisa fornecer o nome da sua barbearia" }),
-  email: z
-    .string()
-    .email({ message: "Você precisa fornecer um e-mail válido" }),
-  password: z
-    .string()
-    .min(5, { message: "Sua senha precisa ter no mínimo 5 caracteres" }),
-})
+const signUpSchema = z
+  .object({
+    fullName: z.string().min(1, { message: "Você precisa fornecer seu nome" }),
+    barberShopName: z
+      .string()
+      .min(1, { message: "Você precisa fornecer o nome da sua barbearia" }),
+    email: z
+      .string()
+      .email({ message: "Você precisa fornecer um e-mail válido" }),
+    password: z
+      .string()
+      .min(5, { message: "Sua senha precisa ter no mínimo 5 caracteres" }),
+    confirmPassword: z.string().min(5, {
+      message: "Sua senha precisa ter no mínimo 5 caracteres",
+    }),
+  })
+  .refine(data => data.password === data.confirmPassword, {
+    message: "As senhas devem ser iguais",
+    path: ["confirmPassword"],
+  })
 
 type SignUpSchema = z.infer<typeof signUpSchema>
 
 export function SignUpForm() {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const navigate = useNavigate()
 
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting, errors },
+    reset,
+    formState: { errors },
   } = useForm<SignUpSchema>({
     resolver: zodResolver(signUpSchema),
   })
@@ -39,12 +53,33 @@ export function SignUpForm() {
     barberShopName,
     password,
   }: SignUpSchema) => {
-    const data = { email, fullName, barberShopName, password }
+    setIsLoading(true)
     try {
-      console.log(data)
+      // to test the loading
+      await new Promise(resolve => setTimeout(resolve, 3000))
+
+      const { status } = await axios.post(
+        `${env.VITE_API_URL}/users`,
+        {
+          email,
+          name: fullName,
+          barberShopName,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+
+      if (status !== 201) {
+        throw new Error("Erro ao registrar usuário!")
+      }
+
+      reset()
 
       toast.success("Conta Criada!", {
-        description: "",
         action: {
           label: "Login",
           onClick: () => {
@@ -52,8 +87,13 @@ export function SignUpForm() {
           },
         },
       })
-    } catch (err) {
-      toast.error("Erro ao registrar usuário!")
+    } catch (error) {
+      toast.error("Erro ao registrar usuário!", {
+        // @ts-ignore
+        description: error.message,
+      })
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -123,7 +163,25 @@ export function SignUpForm() {
             )}
           </div>
 
-          <Button type="submit" disabled={isSubmitting}>
+          <div className="grid gap-2">
+            <Label htmlFor="confirmPassword">Confirme sua senha</Label>
+            <Input
+              id="confirmPassword"
+              placeholder="u344X!8%"
+              type="password"
+              {...register("confirmPassword")}
+            />
+            {errors.confirmPassword && (
+              <span className="text-sm text-red-500">
+                {errors.confirmPassword.message}
+              </span>
+            )}
+          </div>
+
+          <Button type="submit" disabled={isLoading}>
+            {isLoading && (
+              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+            )}
             Finalizar cadastro
           </Button>
         </div>

@@ -1,8 +1,12 @@
+import { env } from "@/env"
 import { zodResolver } from "@hookform/resolvers/zod"
+import axios from "axios"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { toast } from "sonner"
 import { z } from "zod"
+import { Icons } from "./icons"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import { Label } from "./ui/label"
@@ -19,13 +23,15 @@ const signInSchema = z.object({
 type SignInSchema = z.infer<typeof signInSchema>
 
 export function SignInForm() {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
 
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting, errors },
+    reset,
+    formState: { errors },
   } = useForm<SignInSchema>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
@@ -34,18 +40,50 @@ export function SignInForm() {
     },
   })
 
-  const handleAuthenticate = async ({ email }: SignInSchema) => {
-    navigate("/")
+  const handleAuthenticate = async ({ email, password }: SignInSchema) => {
+    setIsLoading(true)
+    try {
+      // to test the loading
+      await new Promise(resolve => setTimeout(resolve, 3000))
 
-    toast.success("Login efetuado com sucesso!", {
-      description: `Bem-vindo, ${email}!`,
-      action: {
-        label: "Dashboard",
-        onClick: () => {
-          navigate("/dashboard")
+      const { data, status } = await axios.post(
+        `${env.VITE_API_URL}/sign-in`,
+        {
+          email,
+          password,
         },
-      },
-    })
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      if (status !== 200) {
+        throw new Error("Não foi possível efetuar o login. Tente novamente.")
+      }
+
+      localStorage.setItem("token", JSON.stringify(await data?.token))
+
+      reset()
+      navigate("/")
+
+      toast.success("Login efetuado com sucesso!", {
+        description: `Bem-vindo, ${email}!`,
+        action: {
+          label: "Dashboard",
+          onClick: () => {
+            navigate("/dashboard")
+          },
+        },
+      })
+    } catch (error) {
+      toast.error("Não foi possível efetuar o login. Tente novamente.", {
+        // @ts-ignore
+        description: error.message,
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -86,7 +124,10 @@ export function SignInForm() {
             )}
           </div>
 
-          <Button type="submit" disabled={isSubmitting}>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading && (
+              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+            )}
             Acessar painel
           </Button>
         </div>
