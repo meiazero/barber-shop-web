@@ -1,10 +1,12 @@
 import { env } from "@/env"
 import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import { toast } from "sonner"
 import { z } from "zod"
+import { Icons } from "./icons"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import { Label } from "./ui/label"
@@ -33,13 +35,14 @@ const signUpSchema = z
 type SignUpSchema = z.infer<typeof signUpSchema>
 
 export function SignUpForm() {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const navigate = useNavigate()
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { isSubmitting, errors },
+    formState: { errors },
   } = useForm<SignUpSchema>({
     resolver: zodResolver(signUpSchema),
   })
@@ -50,7 +53,11 @@ export function SignUpForm() {
     barberShopName,
     password,
   }: SignUpSchema) => {
+    setIsLoading(true)
     try {
+      // to test the loading
+      await new Promise(resolve => setTimeout(resolve, 3000))
+
       const { status } = await axios.post(
         `${env.VITE_API_URL}/users`,
         {
@@ -85,6 +92,8 @@ export function SignUpForm() {
         // @ts-ignore
         description: error.message,
       })
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -169,7 +178,10 @@ export function SignUpForm() {
             )}
           </div>
 
-          <Button type="submit" disabled={isSubmitting}>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading && (
+              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+            )}
             Finalizar cadastro
           </Button>
         </div>

@@ -1,10 +1,12 @@
 import { env } from "@/env"
 import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { toast } from "sonner"
 import { z } from "zod"
+import { Icons } from "./icons"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import { Label } from "./ui/label"
@@ -21,6 +23,7 @@ const signInSchema = z.object({
 type SignInSchema = z.infer<typeof signInSchema>
 
 export function SignInForm() {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
 
@@ -28,7 +31,7 @@ export function SignInForm() {
     register,
     handleSubmit,
     reset,
-    formState: { isSubmitting, errors },
+    formState: { errors },
   } = useForm<SignInSchema>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
@@ -38,7 +41,11 @@ export function SignInForm() {
   })
 
   const handleAuthenticate = async ({ email, password }: SignInSchema) => {
+    setIsLoading(true)
     try {
+      // to test the loading
+      await new Promise(resolve => setTimeout(resolve, 3000))
+
       const { data, status } = await axios.post(
         `${env.VITE_API_URL}/sign-in`,
         {
@@ -74,6 +81,8 @@ export function SignInForm() {
         // @ts-ignore
         description: error.message,
       })
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -115,7 +124,10 @@ export function SignInForm() {
             )}
           </div>
 
-          <Button type="submit" disabled={isSubmitting}>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading && (
+              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+            )}
             Acessar painel
           </Button>
         </div>
