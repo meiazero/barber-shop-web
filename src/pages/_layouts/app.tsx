@@ -1,3 +1,4 @@
+import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
 import { UserContext } from "@/providers/AuthProvider"
 import { useContext, useEffect } from "react"
@@ -19,6 +20,7 @@ export function AppLayout() {
       <div className="flex flex-1 flex-col gap-4 p-8 pt-6">
         <Outlet />
       </div>
+      <Footer />
     </main>
   )
 }
