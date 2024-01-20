@@ -39,8 +39,42 @@
 - O usuário (dono da barbearia) deve confirmar o agendamento antes que ele seja considerado confirmado;
 - O sistema deve enviar um lembrete para o usuário (dono da barbearia) sobre o agendamento antes do horário marcado
 
-## Desenvolvimento
+## Instalação
+
+Faça o clone do projeto:
+
+```bash
+  git clone https://github.com/meiazero/barber-shop-web.git
+```
+
+Entre no diretorio clonado:
+
+```bash
+cd barber-shop-web
+```
+
+Instale as dependencias:
+
+```bash
+pnpm install
+```
+## Stack utilizada
+
+- [vite](https://vitejs.dev/)
+- [React](https://react.dev/)
+- [shadcn-ui](ui.shadcn.com/)
+
+## Contruição
+
+Faça o clone do projeto, crie a branch com seu nome e funcionalidade nova, melhorar, reporte ou conseto de bug.
+
+Ex.: `meiazero/problema-autenticacao`
+
 
 ### Guia de Estilo
 
 Acesso o guia [aqui](.github/STYLEGUIDE.md)
+
+## Licença
+
+[MIT](.github/LICENSE.md)
