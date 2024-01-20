@@ -64,9 +64,9 @@ pnpm install
 - [React](https://react.dev/)
 - [shadcn-ui](ui.shadcn.com/)
 
-## Contruição
+## Contribuição
 
-Faça o clone do projeto, crie a branch com seu nome e funcionalidade nova, melhorar, reporte ou conseto de bug.
+Faça o clone do projeto, crie com branch com seu nome e funcionalidade nova, melhorar, reporte ou conseto de bug e abra um PR.
 
 Ex.: `meiazero/problema-autenticacao`
 
